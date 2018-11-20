@@ -6,109 +6,48 @@ import java.text.*;
 
 public class function
 {
-
-    public float[] floating_number_generator(int count)
+    public double part2_calculation(double n)
+    {
+      return (n/(1-n));
+    }
+    public double function_calculation(int k,int n)
+    {
+      double prod=1.0,o1=0.5,o2=0.9,o3=0.1;
+      for (int i=1;i<=n;i++)
       {
-        float result []=new float[count];
-        for (int i=0;i<count;i++)
+        if(i==1)
         {
-          Random rand = new Random();
-          result[i] = rand.nextFloat();
+          prod=prod*part2_calculation(o1);
         }
-        return result;
-      }
-
-    public void calculate_statistics(float[] array_of_numbers)
-      {
-        float sum=0,average=0,min=0,average_centering=0,variance=0;
-        for (int i=0;i<array_of_numbers.length;i++)
-          sum+=array_of_numbers[i];
-
-        average=sum/array_of_numbers.length;
-
-
-        for (int i = 0; i < array_of_numbers.length; i++)
-          {
-              min=array_of_numbers[i];
-
-              for (int j = i+1; j<array_of_numbers.length; j++)
-              {
-                if(array_of_numbers[j] < array_of_numbers[j-1])
-                {
-                    float temp = array_of_numbers[j];
-                    array_of_numbers[j] = array_of_numbers[j-1];
-                    array_of_numbers[j-1] = temp;
-                }
-
-              }
-           }
-        for (int i=0;i<array_of_numbers.length;i++)
-          average_centering+=Math.pow((array_of_numbers[i]-average),2);
-
-        variance=(float)Math.sqrt(average_centering/(array_of_numbers.length));
-        System.out.println("sum="+sum+" ,variance="+variance+" ,maximun element="+array_of_numbers[array_of_numbers.length-1]+" ,minimum element="+array_of_numbers[0]+" ,average="+average);
-
-
-      }
-
-
-    public void show_results(float[] array)
-      {
-          System.out.println("Given Inputs are");
-          for (int i=0;i<array.length;i++)
-            System.out.print(array[i]+" ");
-
-          System.out.println("");
-      }
-
-
-    public void answer()
-      {
-        Scanner sc=new Scanner(System.in);
-        int n1=0,n2=0,n3=0;
-        while(true)
+        else if(i>1 && i<k)
         {
-
-          try
-            {
-              System.out.println("Enter a number between 1 to 1 million");
-              n1=sc.nextInt();
-              if(n1<1 || n1>1000000)
-              {
-                System.out.println("Wrong choice please re enter from begining !!");
-                continue;
-              }
-              System.out.println("now enter 2 numbers . 2nd number should be greater than previous");
-              n2=sc.nextInt();
-              n3=sc.nextInt();
-
-              if(n3<=n2)
-              {
-                System.out.println("Wrong choice please re enter from begining !!");
-                continue;
-              }
-
-              break;
-
-            }
-          catch(Exception e)
-            {
-              System.out.println("Exception please enter Integer: "+e);
-              continue;
-            }
+          prod=prod*part2_calculation(o2);
         }
+        else
+        {
+          prod=prod*part2_calculation(o3);
+        }
+      }
 
-        float[] array=new float[n1];
-        array=floating_number_generator(n1);
-        show_results(array);
-        calculate_statistics(array);
+      double function_result=1-Math.pow((1+prod),-1);
+      return function_result;
     }
 
+    public void answer()
+    {
+        int[] k={10,100,1000,10000};
+        int[] n={20,120,1200,10200};
+        System.out.println("Calculating function :");
+        for (int i=0;i<k.length;i++)
+        {
+          System.out.println("Value of function is: "+function_calculation(k[i],n[i]));
+        }
 
+    }
     public static void main(String[] args)
       {
 
-        number_generator obj=new number_generator();
+        function obj=new function();
         obj.answer();
 
 

@@ -4,11 +4,12 @@ public class prime
 {
 
 
-  public void prime_number_calculation(long upper_limit,long lower_limit)
+  public long[] prime_number_calculation(long upper_limit,long lower_limit)
   {
 
     int count=0;
     boolean is_prime;
+    long[] prime_array=new long[Integer.MAX_VALUE-10];
 
     for (long i=lower_limit;i<=upper_limit;i++)
     {
@@ -29,12 +30,16 @@ public class prime
         if(i!=0)
         {
           System.out.print(i+" ");
+          prime_array[count]=i;
+          count++;
         }
       }
     }
     System.out.println(" ");
+    return prime_array;
 
   }
+
 
 
   public void answers()

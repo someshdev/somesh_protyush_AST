@@ -1,0 +1,7 @@
+3. Look at the results and make observations. What would happen if we further increase k?
+Answer> the value of the function will get more and more close to 1
+
+
+4. Now assume we have to compute all f (o 1 , . . . , o n ) for increasing n. How efficient will your
+program allow this to be done?
+Answer> the value of the function will get more and more close to 1. Because the negative part of the program will decrease and at a value of n very large it will be almost equal to zero.

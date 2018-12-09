@@ -8,6 +8,7 @@ class Robot(object):
         self.RGB=None
         self.Sensor3=None
         self.Sensor4=None
+
         #print "constructor"
 
     def input(self,reading1=None,reading2=None):
@@ -28,7 +29,7 @@ class Robot(object):
                         self.RGBD[i]=reading1[j]
                         break
                 if not found:
-                    self.RGBD[i]=(None,None,None)
+                    self.RGBD[i]=(0.0,0.0,0.0)
                 #print self.RGBD[i]
 
 
@@ -36,7 +37,7 @@ class Robot(object):
 
         else:
             self.RGBD=None
-        print self.RGBD
+        
         if reading2 is not None:
             #print "not None check2"
             self.RGB=np.empty((5,3),dtype=reading2.dtype)
@@ -54,11 +55,11 @@ class Robot(object):
                         #print self.RGB[i]
                         break
                 if not found:
-                    self.RGB[i]=(None,None,None)
+                    self.RGB[i]=(0.0,0.0,0.0)
                 #print self.RGB[i]
         else:
             self.RGB=None
-        print self.RGB
+
 
 
     def recognise(self):
@@ -68,8 +69,11 @@ class Robot(object):
             return self.RGBD
         recognised=list()
         for i in range(5):
-            a=float(self.RGBD[i,2])
-            b=float(self.RGB[i,2])
+            a,b=None,None
+            if float(self.RGBD[i,2]) != 0.0:
+                a=float(self.RGBD[i,2])
+            if float(self.RGB[i,2]) != 0.0:
+                b=float(self.RGB[i,2])
             if a is None:
                 if b!=None:
                     t=(float(self.RGB[i,2]),)
@@ -88,6 +92,7 @@ class Robot(object):
             else:
                 t=(float(self.RGB[i,2]),)
                 recognised.append((self.object[i]+t))
+            print recognised
         print recognised
         return recognised
 '''

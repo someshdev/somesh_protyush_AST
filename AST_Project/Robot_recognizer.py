@@ -8,52 +8,57 @@ class Robot(object):
         self.RGB=None
         self.Sensor3=None
         self.Sensor4=None
-        print "constructor"
+        #print "constructor"
 
     def input(self,reading1=None,reading2=None):
-        print "Input"
+        #print "Input"
         found= False
         #since we have only 5 objects for detection we check for 5 values in a reading
         if reading1 is not None:
-            print "not None check1"
+            #print "not None check1"
             self.RGBD = np.empty((5,3),dtype=reading1.dtype)
             length1=reading1.shape[0]
 
             for i in range(5):
                 found= False
                 for j in range(length1):
-                    print i+1,reading1[j,1]
+                    #print i+1,reading1[j,1]
                     if (i+1)==int(reading1[j,1]):
                         found= True
-                        self.RGBD[i]=reading1[i]
+                        self.RGBD[i]=reading1[j]
                         break
                 if not found:
                     self.RGBD[i]=(None,None,None)
-                print self.RGBD[i]
+                #print self.RGBD[i]
 
 
 
 
         else:
             self.RGBD=None
-
+        print self.RGBD
         if reading2 is not None:
-            print "not None check2"
+            #print "not None check2"
             self.RGB=np.empty((5,3),dtype=reading2.dtype)
             length2=reading2.shape[0]
             for i in range(5):
                 found= False
                 for j in range(length2):
-                    print i+1,reading2[j,1]
+                    #print i+1,reading2[j,1]
                     if (i+1)==int(reading2[j,1]):
+                        #print i
+                        #print "found"
                         found= True
-                        self.RGB[i]=reading2[i]
+                        #print self.RGB[i]
+                        self.RGB[i]=reading2[j]
+                        #print self.RGB[i]
                         break
                 if not found:
                     self.RGB[i]=(None,None,None)
-                print self.RGB[i]
+                #print self.RGB[i]
         else:
             self.RGB=None
+        print self.RGB
 
 
     def recognise(self):
@@ -83,11 +88,11 @@ class Robot(object):
             else:
                 t=(float(self.RGB[i,2]),)
                 recognised.append((self.object[i]+t))
-
+        print recognised
         return recognised
 
-RGBD1=np.array([("knife",1, 0.99), ("scissor", 2, 0.65), ("spoon", 3, 0.33), ("spoon", 4, 0.80), ("keys", 5, 0.95)])
-RGB1=np.array([("knife",1, 0.55), ("scissor", 2, 0.95), ("fork", 3, 0.99), ("spoon", 4, 0.99), ("keys", 5, 0.95)])
+reading1=np.array([("knife",1, 0.99), ("scissor", 2, 0.65), ("spoon", 3, 0.33), ("spoon", 4, 0.80), ("keys", 5, 0.95)])
+reading2=np.array([ ("keys", 5, 0.95), ("spoon", 4, 0.99),("fork", 3, 0.99), ("scissor", 2, 0.95), ("knife",1, 0.55)])
 reading=Robot()
-reading.input(RGBD1,RGB1)
-print reading.recognise()
+reading.input(reading1,reading2)
+reading.recognise()

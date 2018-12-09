@@ -90,9 +90,10 @@ class Robot(object):
                 recognised.append((self.object[i]+t))
         print recognised
         return recognised
-
+'''
 reading1=np.array([("knife",1, 0.99), ("scissor", 2, 0.65), ("spoon", 3, 0.33), ("spoon", 4, 0.80), ("keys", 5, 0.95)])
 reading2=np.array([ ("keys", 5, 0.95), ("spoon", 4, 0.99),("fork", 3, 0.99), ("scissor", 2, 0.95), ("knife",1, 0.55)])
 reading=Robot()
 reading.input(reading1,reading2)
 reading.recognise()
+'''

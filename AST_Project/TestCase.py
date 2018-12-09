@@ -1,9 +1,17 @@
+from Robot_recognizer import Robot
+import numpy as np
 import unittest
 import Robot_recognizer
 class KnownValues(unittest.TestCase):
-    def test_confidence_level(self):
-        result = Robot_recognizer.recognise(RGBD,RGB)
-        expected = [array(['knife', '1', '0.99'], dtype='|S7'), array(['scissor', '2', '0.95'], dtype='|S7'), array(['fork', '3', '0.99'], dtype='|S7'), array(['spoon', '4', '0.99'], dtype='|S7'), array(['keys', '5', '0.95'], dtype='|S7')]
+    def test_confidence_level_1(self):
+        reading1=np.array([("knife",1, 0.99), ("scissor", 2, 0.65), ("spoon", 3, 0.33), ("spoon", 4, 0.80), ("keys", 5, 0.95)])
+        reading2=np.array([ ("keys", 5, 0.95), ("spoon", 4, 0.99),("fork", 3, 0.99), ("scissor", 2, 0.95), ("knife",1, 0.55)])
+        expected =[('knife', 1, 0.99), ('scissor', 2, 0.95), ('fork', 3, 0.99), ('spoon', 4, 0.99), ('keys', 5, 0.95)]
+        Result_obj=Robot()
+        Result_obj.input(reading1,reading2)
+        result =Result_obj.recognise()
         self.assertEqual(expected,result)
+    
+
 if __name__=='__main__':
     unittest.main()

@@ -37,7 +37,7 @@ class Robot(object):
 
         else:
             self.RGBD=None
-        
+
         if reading2 is not None:
             #print "not None check2"
             self.RGB=np.empty((5,3),dtype=reading2.dtype)
@@ -60,6 +60,121 @@ class Robot(object):
         else:
             self.RGB=None
 
+    def algorithm1(self,reading1,reading2):
+        found= False
+        #since we have only 5 objects for detection we check for 5 values in a reading
+
+        sensor1 = np.empty((5,3),dtype=reading1.dtype)
+        length1=reading1.shape[0]
+        for i in range(5):
+            found= False
+            for j in range(length1):
+                if (i+1)==int(reading1[j,1]):
+                    found= True
+                    sensor1[i]=reading1[j]
+                    break
+            if not found:
+                sensor1[i]=(0.0,0.0,0.0)
+
+        sensor2=np.empty((5,3),dtype=reading2.dtype)
+        length2=reading2.shape[0]
+        for i in range(5):
+            found= False
+            for j in range(length2):
+                if (i+1)==int(reading2[j,1]):
+                    found= True
+                    sensor2[i]=reading2[j]
+                    break
+            if not found:
+                sensor2[i]=(0.0,0.0,0.0)
+
+        return sensor1,sensor2
+
+    def algorithm2(self,reading1,reading2):
+        found= False
+        #since we have only 5 objects for detection we check for 5 values in a reading
+
+        sensor1 = np.empty((5,3),dtype=reading1.dtype)
+        length1=reading1.shape[0]
+        for i in range(5):
+            found= False
+            for j in range(length1):
+                if (i+1)==int(reading1[j,1]):
+                    found= True
+                    sensor1[i]=reading1[j]
+                    break
+            if not found:
+                sensor1[i]=(0.0,0.0,0.0)
+
+        sensor2=np.empty((5,3),dtype=reading2.dtype)
+        length2=reading2.shape[0]
+        for i in range(5):
+            found= False
+            for j in range(length2):
+                if (i+1)==int(reading2[j,1]):
+                    found= True
+                    sensor2[i]=reading2[j]
+                    break
+            if not found:
+                sensor2[i]=(0.0,0.0,0.0)
+
+        return sensor1,sensor2
+
+    def sort_algo(self,algo1_sensor1,algo1_sensor2,algo2_sensor1,algo2_sensor2):
+        self.RGBD=np.empty((5,3),dtype=algo1_sensor1.dtype)
+        for i in range(5): #for sensor1
+            a,b=None,None
+            if float(algo1_sensor1[i,2]) != 0.0:
+                a=float(algo1_sensor1[i,2])
+            if float(algo2_sensor1[i,2]) != 0.0:
+                b=float(algo2_sensor1[i,2])
+            if a is None:
+                if b!=None:
+                    t=(float(algo2_sensor1[i,2]),)
+                    self.RGBD[i]=(self.object[i]+t)
+                continue
+            if b is None:
+                if a!=None:
+                    t=(float(algo1_sensor1[i,2]),)
+                    self.RGBD[i]=(self.object[i]+t)
+                continue
+
+            if a-b>0:
+                t=(float(algo1_sensor1[i,2]),)
+                self.RGBD[i]=(self.object[i]+t)
+
+            else:
+                t=(float(algo2_sensor1[i,2]),)
+                self.RGBD[i]=(self.object[i]+t)
+
+        self.RGB=np.empty((5,3),dtype=algo2_sensor1.dtype)
+        for i in range(5): #for sensor2
+            a,b=None,None
+            if float(algo1_sensor2[i,2]) != 0.0:
+                a=float(algo1_sensor2[i,2])
+            if float(algo2_sensor2[i,2]) != 0.0:
+                b=float(algo2_sensor2[i,2])
+            if a is None:
+                if b!=None:
+                    t=(float(algo2_sensor2[i,2]),)
+                    self.RGB[i]=(self.object[i]+t)
+                continue
+            if b is None:
+                if a!=None:
+                    t=(float(algo1_sensor2[i,2]),)
+                    self.RGB[i]=(self.object[i]+t)
+                continue
+
+            if a-b>0:
+                t=(float(algo1_sensor2[i,2]),)
+                self.RGB[i]=(self.object[i]+t)
+
+            else:
+                t=(float(algo2_sensor2[i,2]),)
+                self.RGB[i]=(self.object[i]+t)
+
+        print self.RGBD
+        print self.RGB
 
 
     def recognise(self):
@@ -92,7 +207,7 @@ class Robot(object):
             else:
                 t=(float(self.RGB[i,2]),)
                 recognised.append((self.object[i]+t))
-            print recognised
+
         print recognised
         return recognised
 '''

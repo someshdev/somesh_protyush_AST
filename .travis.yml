@@ -8,13 +8,10 @@ script:
  - python -m unittest
  
 install:
-  - pip install codecov
-
-codecov:
-  token: 87f8d309-1fe3-4ca9-ba24-45572363b515
+  - pip install coveralls
 
 script:
   - coverage run AST_Project/TestCase1.py
 
 after_success:
-- codecov
+- coveralls

@@ -4,6 +4,7 @@ import numpy as np
 import unittest
 
 class KnownValues(unittest.TestCase):
+
     def test_confidence_level_1(self):
         reading1=np.array([("knife",1, 0.99), ("scissor", 2, 0.65), ("spoon", 3, 0.33), ("spoon", 4, 0.80), ("keys", 5, 0.95)])
         reading2=np.array([ ("keys", 5, 0.95), ("spoon", 4, 0.99),("fork", 3, 0.99), ("scissor", 2, 0.95), ("knife",1, 0.55)])
@@ -34,7 +35,7 @@ class KnownValues(unittest.TestCase):
         Result_obj.input(reading1,reading2)
         result =Result_obj.recognise()
         self.assertEqual(expected,result)
-    def test_confidence_level_4(self):
+    def test_confidence_level_5(self):
         reading1=np.array([('knife',1, 0.99), ('scissor', 2, 0.65)])
         reading2=np.array([('fork', 3, 0.99), ('spoon', 4, 0.99)])
         expected =[('knife',1, 0.99), ('scissor', 2, 0.65),('fork', 3, 0.99), ('spoon', 4, 0.99)]
@@ -42,12 +43,24 @@ class KnownValues(unittest.TestCase):
         Result_obj.input(reading1,reading2)
         result =Result_obj.recognise()
         self.assertEqual(expected,result)
-    def test_confidence_level_5(self):
+    def test_confidence_level_6(self):
         reading1=np.array([('knife',1, 0.94),('knife',1, 0.69),('knife',1, 0.89)])
         reading2=np.array([('knife',1, 0.99),('fork', 3, 0.99)])
         expected=[('knife',1, 0.99),('fork', 3, 0.99)]
         Result_obj=Robot()
         Result_obj.input(reading1,reading2)
+        result =Result_obj.recognise()
+        self.assertEqual(expected,result)
+    def test_confidence_level_7(self):
+        algo1_reading1=np.array([('knife',1, 0.89)])
+        algo1_reading2=np.array([('knife',1, 0.35)])
+        algo2_reading1=np.array([('knife',1, 0.69)])
+        algo2_reading2=np.array([('knife',1, 0.80)])
+        expected=[('knife',1, 0.89)]
+        Result_obj=Robot()
+        a1r1,a1r2=Result_obj.algorithm1(algo1_reading1,algo1_reading2)
+        a2r1,a2r2=Result_obj.algorithm2(algo2_reading1,algo2_reading2)
+        Result_obj.sort_algo(a1r1,a1r2,a2r1,a2r2)
         result =Result_obj.recognise()
         self.assertEqual(expected,result)
 

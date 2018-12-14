@@ -1,0 +1,9 @@
+S.O.L.I.D. principle:
+
+Yes, addition of new code lines will only add new elements for comparisons but changes to any existing proceess is not allowed.
+
+
+
+How to test the "Open for update" principle ?
+
+new addition to code increases the resources to compared with out changing in the comparison techniques, hence it increases the reliability of the system to recognise objects more preciesly, as a result with each update of the system we increase the reliability and precision aa whole which is proof of doing open for update.

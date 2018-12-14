@@ -10,8 +10,8 @@ script:
 install:
   - pip install codecov
 
-coverage:
- - range: “70…100”
+codecov:
+  token: 87f8d309-1fe3-4ca9-ba24-45572363b515
 
 script:
   - coverage run AST_Project/TestCase1.py

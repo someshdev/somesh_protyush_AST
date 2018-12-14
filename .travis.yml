@@ -9,7 +9,7 @@ install:
   - pip install codecov
 
 script:
-  - coverage run object_merger_test.py
+  - coverage run TestCase.py
 
 after_success:
 - codecov

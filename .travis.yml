@@ -8,6 +8,9 @@ script:
 install:
   - pip install codecov
 
+coverage:
+ - range: “70…100”
+
 script:
   - coverage run AST_Project/TestCase1.py
 

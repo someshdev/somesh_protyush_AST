@@ -4,3 +4,12 @@ python:
  - 3.4
 script:
  - python -m unittest
+ 
+install:
+  - pip install codecov
+
+script:
+  - coverage run object_merger_test.py
+
+after_success:
+- codecov

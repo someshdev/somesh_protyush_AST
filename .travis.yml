@@ -1,0 +1,15 @@
+language: python
+python: 
+ - 2.7
+
+script:
+ - python -m unittest
+ 
+install:
+  - pip install codecov
+
+script:
+  - coverage run AST_Project/TestCase1.py
+
+after_success:
+- codecov

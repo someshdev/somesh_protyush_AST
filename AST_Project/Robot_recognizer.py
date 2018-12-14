@@ -207,7 +207,11 @@ class Robot(object):
             else:
                 t=(float(self.RGB[i,2]),)
                 recognised.append((self.object[i]+t))
+<<<<<<< HEAD
 
+=======
+            print recognised
+>>>>>>> 1ba23dd8cafcaad42ee3c36bf33c3afc2e5f572b
         print recognised
         return recognised
 '''

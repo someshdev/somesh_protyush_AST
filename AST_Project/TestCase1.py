@@ -51,18 +51,7 @@ class KnownValues(unittest.TestCase):
         Result_obj.input(reading1,reading2)
         result =Result_obj.recognise()
         self.assertEqual(expected,result)
-    def test_confidence_level_7(self):
-        algo1_reading1=np.array([('knife',1, 0.89)])
-        algo1_reading2=np.array([('knife',1, 0.35)])
-        algo2_reading1=np.array([('knife',1, 0.69)])
-        algo2_reading2=np.array([('knife',1, 0.80)])
-        expected=[('knife',1, 0.89)]
-        Result_obj=Robot()
-        a1r1,a1r2=Result_obj.algorithm1(algo1_reading1,algo1_reading2)
-        a2r1,a2r2=Result_obj.algorithm2(algo2_reading1,algo2_reading2)
-        Result_obj.sort_algo(a1r1,a1r2,a2r1,a2r2)
-        result =Result_obj.recognise()
-        self.assertEqual(expected,result)
+        
 
 if __name__=='__main__':
     unittest.main()

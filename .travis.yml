@@ -8,10 +8,11 @@ script:
  - python -m unittest
  
 install:
-  - pip install coveralls
+  - pip install codecov
 
 script:
-  - coverage run AST_Project/TestCase1.py
+  - codecov run AST_Project/TestCase1.py
+
 
 after_success:
-- coveralls
+    - bash <(curl -s https://codecov.io/bash)

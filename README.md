@@ -7,5 +7,7 @@ These sensors are selected such that one is an absolute sensor, for instance, a 
 
 + **Continuous Integration** - [![Build Status](https://travis-ci.com/someshdev/somesh_protyush_AST.svg?branch=master)](https://travis-ci.com/someshdev/somesh_protyush_AST)
 
-+ **Test/Code Coverage** - [![codecov.io Code Coverage](https://img.shields.io/codecov/c/github/somesh_protyush_AST/AST_Project.svg?maxAge=2592000)](https://codecov.io/github/somesh_protyush_AST/AST_Project)
++ **Test/Code Coverage** - [![codecov.io Code Coverage](https://img.shields.io/codecov/c/github/somesh_protyush_AST/AST_Project.svg?)](https://codecov.io/github/somesh_protyush_AST/AST_Project)
+
+
 + **Documentation** - [![doc](https://img.shields.io/badge/test%20report-master-blue.svg?style=flat)](https://github.com/someshdev/somesh_protyush_AST/blob/master/AST_Project/documentation.pdf)
